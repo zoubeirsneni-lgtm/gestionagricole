@@ -17,15 +17,34 @@ import {
   SelectTrigger, 
   SelectValue 
 } from '@/components/ui-elements/app-select.tsx';
+import { 
+  Dialog, 
+  DialogContent, 
+  DialogHeader, 
+  DialogTitle, 
+  DialogTrigger,
+  DialogFooter
+} from '@/components/ui-elements/app-dialog.tsx';
+import { Input } from '@/components/ui-elements/app-input.tsx';
+import { Label } from '@/components/ui-elements/app-label.tsx';
 import { Badge } from '@/components/ui-elements/app-badge.tsx';
-import { Shield, ShieldAlert, User, Trash2 } from 'lucide-react';
+import { Shield, ShieldAlert, User, Trash2, UserPlus, AlertTriangle } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui-elements/app-card.tsx';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 
 export function UserManagement() {
-  const { data: users, update, remove } = useFirestore<any>('users');
+  const { data: users, add, update, remove } = useFirestore<any>('users');
   const { isSuperAdmin, user: currentUser } = useAuth();
+  
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState<any>(null);
+  const [newUser, setNewUser] = useState({
+    email: '',
+    displayName: '',
+    role: 'viewer' as const
+  });
 
   const handleRoleChange = async (userId: string, newRole: string) => {
     try {
@@ -40,19 +59,42 @@ export function UserManagement() {
     }
   };
 
-  const handleRemove = async (userId: string) => {
-    if (userId === currentUser?.uid) {
-      toast.error('Vous ne pouvez pas supprimer votre propre compte.');
+  const handleAddUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newUser.email) {
+      toast.error('L\'email est obligatoire.');
       return;
     }
     
-    if (window.confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')) {
-      try {
-        await remove(userId);
-        toast.success('Utilisateur supprimé.');
-      } catch (error) {
-        toast.error('Erreur lors de la suppression.');
+    try {
+      const exists = users.find(u => u.email.toLowerCase() === newUser.email.toLowerCase());
+      if (exists) {
+        toast.error('Cet utilisateur existe déjà.');
+        return;
       }
+
+      await add({
+        ...newUser,
+        createdAt: new Date().toISOString()
+      });
+      toast.success('Utilisateur ajouté avec succès.');
+      setIsAddOpen(false);
+      setNewUser({ email: '', displayName: '', role: 'viewer' });
+    } catch (error) {
+      toast.error('Erreur lors de l\'ajout de l\'utilisateur.');
+    }
+  };
+
+  const confirmDelete = async () => {
+    if (!userToDelete) return;
+    
+    try {
+      await remove(userToDelete.id);
+      toast.success('Utilisateur supprimé.');
+      setIsDeleteOpen(false);
+      setUserToDelete(null);
+    } catch (error) {
+      toast.error('Erreur lors de la suppression.');
     }
   };
 
@@ -68,11 +110,70 @@ export function UserManagement() {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center bg-white p-6 rounded-[32px] border border-[#e2e2d9]">
         <div>
           <h2 className="text-3xl font-serif text-[#2d4a3e]">Gestion des Utilisateurs</h2>
           <p className="text-[#5a5a40]">Gérez les rôles et les permissions d'accès.</p>
         </div>
+        
+        <Dialog open={isAddOpen} onOpenChange={setIsAddOpen}>
+          <DialogTrigger asChild>
+            <Button className="bg-[#2d4a3e] hover:bg-[#1f332b] text-white rounded-full px-6 flex items-center gap-2">
+              <UserPlus size={18} />
+              Ajouter un utilisateur
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle className="font-serif text-2xl text-[#2d4a3e]">Ajouter un utilisateur</DialogTitle>
+            </DialogHeader>
+            <form onSubmit={handleAddUser} className="space-y-4 py-4">
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-[#5a5a40]">Email (obligatoire)</Label>
+                <Input 
+                  id="email" 
+                  type="email" 
+                  value={newUser.email} 
+                  onChange={(e) => setNewUser({...newUser, email: e.target.value})}
+                  placeholder="exemple@email.com"
+                  className="rounded-xl"
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="name" className="text-[#5a5a40]">Nom (optionnel)</Label>
+                <Input 
+                  id="name" 
+                  value={newUser.displayName} 
+                  onChange={(e) => setNewUser({...newUser, displayName: e.target.value})}
+                  placeholder="Prénom Nom"
+                  className="rounded-xl"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label className="text-[#5a5a40]">Rôle initial</Label>
+                <Select 
+                  value={newUser.role} 
+                  onValueChange={(val: any) => setNewUser({...newUser, role: val})}
+                >
+                  <SelectTrigger className="w-full rounded-xl">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="super_admin">Super Admin</SelectItem>
+                    <SelectItem value="admin">Administrateur</SelectItem>
+                    <SelectItem value="viewer">Lecture Seule</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <DialogFooter className="pt-4">
+                <Button type="submit" className="w-full bg-[#c27858] hover:bg-[#a66346] text-white rounded-full h-12">
+                  Créer le profil
+                </Button>
+              </DialogFooter>
+            </form>
+          </DialogContent>
+        </Dialog>
       </div>
 
       <Card className="rounded-[32px] border-[#e2e2d9] shadow-none overflow-hidden">
@@ -97,7 +198,7 @@ export function UserManagement() {
                         <User size={20} />
                       </div>
                       <div>
-                        <div className="font-bold text-[#2d4a3e]">{u.displayName || 'Sans nom'}</div>
+                        <div className="font-bold text-[#2d4a3e]">{u.displayName || 'Utilisateur en attente'}</div>
                         <div className="text-xs text-[#5a5a40] font-mono">{u.email}</div>
                       </div>
                     </div>
@@ -117,7 +218,7 @@ export function UserManagement() {
                       <Select 
                         defaultValue={u.role} 
                         onValueChange={(val) => handleRoleChange(u.id, val)}
-                        disabled={u.email === 'zoubeirsneni@gmail.com'} // Protect the primary root
+                        disabled={u.email === 'zoubeirsneni@gmail.com'} 
                       >
                         <SelectTrigger className="w-36 rounded-full border-[#e2e2d9] font-medium text-xs">
                           <SelectValue placeholder="Changer rôle" />
@@ -129,12 +230,15 @@ export function UserManagement() {
                         </SelectContent>
                       </Select>
                       
-                      {u.email !== 'zoubeirsneni@gmail.com' && (
+                      {u.email !== 'zoubeirsneni@gmail.com' && u.uid !== currentUser?.uid && (
                         <Button 
                           variant="ghost" 
                           size="icon" 
                           className="text-[#991b1b] hover:bg-[#fee2e2] rounded-full"
-                          onClick={() => handleRemove(u.id)}
+                          onClick={() => {
+                            setUserToDelete(u);
+                            setIsDeleteOpen(true);
+                          }}
                         >
                           <Trash2 size={16} />
                         </Button>
@@ -148,6 +252,29 @@ export function UserManagement() {
         </CardContent>
       </Card>
       
+      {/* Delete confirmation dialog */}
+      <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
+        <DialogContent className="sm:max-w-[400px]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-[#991b1b] font-serif text-xl">
+              <AlertTriangle className="size-5" />
+              Confirmer la suppression
+            </DialogTitle>
+          </DialogHeader>
+          <div className="py-2 text-[#5a5a40] text-sm">
+            Êtes-vous sûr de vouloir supprimer l'accès de <strong>{userToDelete?.email}</strong> ? Cette action est irréversible.
+          </div>
+          <DialogFooter className="gap-2 sm:gap-0">
+            <Button variant="outline" onClick={() => setIsDeleteOpen(false)} className="rounded-full">
+              Annuler
+            </Button>
+            <Button onClick={confirmDelete} className="bg-[#991b1b] hover:bg-[#7f1d1d] text-white rounded-full">
+              Supprimer définitivement
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       <div className="bg-[#f5f5f0] p-6 rounded-[24px] border border-[#e2e2d9] flex gap-4 items-start">
         <Shield className="w-6 h-6 text-[#2d4a3e] shrink-0" />
         <div className="text-sm text-[#5a5a40] leading-relaxed">
