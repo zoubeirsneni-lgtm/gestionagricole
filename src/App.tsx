@@ -8,6 +8,7 @@ import { AnimalList } from '@/components/AnimalList.tsx';
 import { HealthTracker } from '@/components/HealthTracker.tsx';
 import { ReproductionTracker } from '@/components/ReproductionTracker.tsx';
 import { StockManagement } from '@/components/StockManagement.tsx';
+import { UserManagement } from '@/components/UserManagement.tsx';
 import { Button } from '@/components/ui-elements/app-button.tsx';
 import { Toaster } from '@/components/ui-elements/app-sonner.tsx';
 import { PawPrint, LogIn } from 'lucide-react';
@@ -75,6 +76,7 @@ export default function App() {
       case 'health': return <HealthTracker />;
       case 'reproduction': return <ReproductionTracker />;
       case 'stocks': return <StockManagement />;
+      case 'users': return <UserManagement />;
       default: return <Dashboard setActiveTab={setActiveTab} />;
     }
   };

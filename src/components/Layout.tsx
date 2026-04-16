@@ -9,11 +9,13 @@ import {
   Menu,
   X,
   Settings,
-  TrendingUp
+  TrendingUp,
+  Users
 } from 'lucide-react';
 import { Button } from '@/components/ui-elements/app-button.tsx';
 import { logOut } from '@/lib/firebase.ts';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/hooks/useAuth.ts';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -24,6 +26,7 @@ interface LayoutProps {
 
 export function Layout({ children, activeTab, setActiveTab, userEmail }: LayoutProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+  const { isSuperAdmin, user } = useAuth();
 
   const menuItems = [
     { id: 'dashboard', label: 'Tableau de bord', icon: LayoutDashboard },
@@ -32,7 +35,11 @@ export function Layout({ children, activeTab, setActiveTab, userEmail }: LayoutP
     { id: 'reproduction', label: 'Reproduction', icon: Baby },
     { id: 'health', label: 'Santé', icon: HeartPulse },
     { id: 'stocks', label: 'Stocks', icon: Package },
+    ...(isSuperAdmin ? [{ id: 'users', label: 'Utilisateurs', icon: Users }] : []),
   ];
+
+  const roleLabel = user?.role === 'super_admin' ? 'Super Admin' : 
+                   user?.role === 'admin' ? 'Administrateur' : 'Lecteur';
 
   return (
     <div className="flex h-screen bg-[#f5f5f0] font-sans text-[#1a1a1a]">
@@ -71,7 +78,7 @@ export function Layout({ children, activeTab, setActiveTab, userEmail }: LayoutP
               </div>
               <div className="overflow-hidden">
                 <p className="truncate text-sm font-medium text-white">{userEmail?.split('@')[0]}</p>
-                <p className="text-xs text-[#f5f5f0]/50 italic">Éleveur Certifié</p>
+                <p className="text-xs text-[#f5f5f0]/50 italic">{roleLabel}</p>
               </div>
             </div>
           </div>
