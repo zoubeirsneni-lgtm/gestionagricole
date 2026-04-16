@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useFirestore } from '@/hooks/useFirestore';
 import { Button } from '@/components/ui/app-button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/app-input';
+import { Label } from '@/components/ui/app-label';
 import { cn } from '@/lib/utils';
 import { 
   Select, 
@@ -10,16 +10,16 @@ import {
   SelectItem, 
   SelectTrigger, 
   SelectValue 
-} from '@/components/ui/select';
+} from '@/components/ui/app-select';
 import { 
   Dialog, 
   DialogContent, 
   DialogHeader, 
   DialogTitle, 
   DialogTrigger 
-} from '@/components/ui/dialog';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+} from '@/components/ui/app-dialog';
+import { Card, CardContent } from '@/components/ui/app-card';
+import { Badge } from '@/components/ui/app-badge';
 import { Plus, Package, AlertTriangle, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 import { toast } from 'sonner';
 

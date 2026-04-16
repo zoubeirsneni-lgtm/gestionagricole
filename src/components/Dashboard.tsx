@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/app-card';
 import { Button } from '@/components/ui/app-button';
 import { cn } from '@/lib/utils';
 import { useFirestore } from '@/hooks/useFirestore';
