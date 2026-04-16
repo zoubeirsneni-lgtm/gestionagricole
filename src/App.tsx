@@ -8,7 +8,7 @@ import { AnimalList } from './components/AnimalList';
 import { HealthTracker } from './components/HealthTracker';
 import { ReproductionTracker } from './components/ReproductionTracker';
 import { StockManagement } from './components/StockManagement';
-import { Button } from '@/components/ui/button';
+import { Button } from './components/ui/button';
 import { Toaster } from './components/ui/sonner';
 import { PawPrint, LogIn } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
