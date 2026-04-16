@@ -7,26 +7,26 @@ import {
   TableHead, 
   TableHeader, 
   TableRow 
-} from '@/components/app-ui/app-table.tsx';
-import { Button } from '@/components/app-ui/app-button.tsx';
-import { Input } from '@/components/app-ui/app-input.tsx';
+} from '@/components/ui-elements/app-table.tsx';
+import { Button } from '@/components/ui-elements/app-button.tsx';
+import { Input } from '@/components/ui-elements/app-input.tsx';
 import { 
   Dialog, 
   DialogContent, 
   DialogHeader, 
   DialogTitle, 
   DialogTrigger 
-} from '@/components/app-ui/app-dialog.tsx';
+} from '@/components/ui-elements/app-dialog.tsx';
 import { 
   Select, 
   SelectContent, 
   SelectItem, 
   SelectTrigger, 
   SelectValue 
-} from '@/components/app-ui/app-select.tsx';
-import { Label } from '@/components/app-ui/app-label.tsx';
+} from '@/components/ui-elements/app-select.tsx';
+import { Label } from '@/components/ui-elements/app-label.tsx';
 import { cn } from '@/lib/utils';
-import { Badge } from '@/components/app-ui/app-badge.tsx';
+import { Badge } from '@/components/ui-elements/app-badge.tsx';
 import { Plus, Search, Trash2, Edit2 } from 'lucide-react';
 import { toast } from 'sonner';
 

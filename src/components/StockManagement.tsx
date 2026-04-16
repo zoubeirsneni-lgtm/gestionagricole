@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useFirestore } from '@/hooks/useFirestore.ts';
-import { Button } from '@/components/app-ui/app-button.tsx';
-import { Input } from '@/components/app-ui/app-input.tsx';
-import { Label } from '@/components/app-ui/app-label.tsx';
+import { Button } from '@/components/ui-elements/app-button.tsx';
+import { Input } from '@/components/ui-elements/app-input.tsx';
+import { Label } from '@/components/ui-elements/app-label.tsx';
 import { cn } from '@/lib/utils';
 import { 
   Select, 
@@ -10,16 +10,16 @@ import {
   SelectItem, 
   SelectTrigger, 
   SelectValue 
-} from '@/components/app-ui/app-select.tsx';
+} from '@/components/ui-elements/app-select.tsx';
 import { 
   Dialog, 
   DialogContent, 
   DialogHeader, 
   DialogTitle, 
   DialogTrigger 
-} from '@/components/app-ui/app-dialog.tsx';
-import { Card, CardContent } from '@/components/app-ui/app-card.tsx';
-import { Badge } from '@/components/app-ui/app-badge.tsx';
+} from '@/components/ui-elements/app-dialog.tsx';
+import { Card, CardContent } from '@/components/ui-elements/app-card.tsx';
+import { Badge } from '@/components/ui-elements/app-badge.tsx';
 import { Plus, Package, AlertTriangle, ArrowUpRight, ArrowDownRight } from 'lucide-react';
 import { toast } from 'sonner';
 

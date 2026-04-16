@@ -8,8 +8,8 @@ import { AnimalList } from '@/components/AnimalList.tsx';
 import { HealthTracker } from '@/components/HealthTracker.tsx';
 import { ReproductionTracker } from '@/components/ReproductionTracker.tsx';
 import { StockManagement } from '@/components/StockManagement.tsx';
-import { Button } from '@/components/app-ui/app-button.tsx';
-import { Toaster } from '@/components/app-ui/app-sonner.tsx';
+import { Button } from '@/components/ui-elements/app-button.tsx';
+import { Toaster } from '@/components/ui-elements/app-sonner.tsx';
 import { PawPrint, LogIn } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
