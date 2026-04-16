@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/app-button';
 import { cn } from '@/lib/utils';
-import { useFirestore } from '../hooks/useFirestore';
+import { useFirestore } from '@/hooks/useFirestore';
 import { PawPrint, HeartPulse, Baby, Package, TrendingUp } from 'lucide-react';
 import { 
   BarChart, 

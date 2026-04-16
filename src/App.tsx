@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { useAuth } from './hooks/useAuth';
-import { signIn } from './lib/firebase';
-import { Layout } from './components/Layout';
-import { Dashboard } from './components/Dashboard';
-import { Summary } from './components/Summary';
-import { AnimalList } from './components/AnimalList';
-import { HealthTracker } from './components/HealthTracker';
-import { ReproductionTracker } from './components/ReproductionTracker';
-import { StockManagement } from './components/StockManagement';
-import { Button } from './components/ui/button';
-import { Toaster } from './components/ui/sonner';
+import { useAuth } from '@/hooks/useAuth';
+import { signIn } from '@/lib/firebase';
+import { Layout } from '@/components/Layout';
+import { Dashboard } from '@/components/Dashboard';
+import { Summary } from '@/components/Summary';
+import { AnimalList } from '@/components/AnimalList';
+import { HealthTracker } from '@/components/HealthTracker';
+import { ReproductionTracker } from '@/components/ReproductionTracker';
+import { StockManagement } from '@/components/StockManagement';
+import { Button } from '@/components/ui/app-button';
+import { Toaster } from '@/components/ui/sonner';
 import { PawPrint, LogIn } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 

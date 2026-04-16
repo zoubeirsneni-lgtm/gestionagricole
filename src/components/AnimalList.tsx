@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useFirestore } from '../hooks/useFirestore';
+import { useFirestore } from '@/hooks/useFirestore';
 import { 
   Table, 
   TableBody, 
@@ -8,7 +8,7 @@ import {
   TableHeader, 
   TableRow 
 } from '@/components/ui/table';
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/app-button';
 import { Input } from '@/components/ui/input';
 import { 
   Dialog, 
@@ -23,10 +23,10 @@ import {
   SelectItem, 
   SelectTrigger, 
   SelectValue 
-} from './ui/select';
-import { Label } from './ui/label';
+} from '@/components/ui/select';
+import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
-import { Badge } from './ui/badge';
+import { Badge } from '@/components/ui/badge';
 import { Plus, Search, Trash2, Edit2 } from 'lucide-react';
 import { toast } from 'sonner';
 

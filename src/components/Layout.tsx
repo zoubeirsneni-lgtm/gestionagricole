@@ -11,9 +11,9 @@ import {
   Settings,
   TrendingUp
 } from 'lucide-react';
-import { Button } from './ui/button';
-import { logOut } from '../lib/firebase';
-import { cn } from '../lib/utils';
+import { Button } from '@/components/ui/app-button';
+import { logOut } from '@/lib/firebase';
+import { cn } from '@/lib/utils';
 
 interface LayoutProps {
   children: React.ReactNode;

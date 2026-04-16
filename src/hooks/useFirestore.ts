@@ -10,8 +10,8 @@ import {
   doc,
   QueryConstraint
 } from 'firebase/firestore';
-import { db } from '../lib/firebase';
-import { useAuth } from './useAuth';
+import { db } from '@/lib/firebase';
+import { useAuth } from '@/hooks/useAuth';
 
 export function useFirestore<T>(collectionName: string, constraints: QueryConstraint[] = []) {
   const { user } = useAuth();
