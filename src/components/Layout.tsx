@@ -11,7 +11,7 @@ import {
   Settings,
   TrendingUp
 } from 'lucide-react';
-import { Button } from '@/components/ui/app-button';
+import { Button } from '@/components/ui/app-button.tsx';
 import { logOut } from '@/lib/firebase';
 import { cn } from '@/lib/utils';
 
