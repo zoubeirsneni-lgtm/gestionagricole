@@ -1,0 +1,71 @@
+{
+  "entities": {
+    "Animal": {
+      "title": "Animal",
+      "description": "Représente un animal dans l'élevage",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "tagId": { "type": "string", "description": "Numéro d'identification/boucle" },
+        "species": { "type": "string", "enum": ["Bovin", "Ovin", "Caprin", "Porcin", "Volaille"] },
+        "breed": { "type": "string", "description": "Race" },
+        "birthDate": { "type": "string", "format": "date" },
+        "gender": { "type": "string", "enum": ["Mâle", "Femelle"] },
+        "status": { "type": "string", "enum": ["Actif", "Vendu", "Décédé"] },
+        "weight": { "type": "number" },
+        "ownerId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["tagId", "species", "gender", "status", "ownerId"]
+    },
+    "HealthRecord": {
+      "title": "Health Record",
+      "description": "Suivi de santé d'un animal",
+      "type": "object",
+      "properties": {
+        "animalId": { "type": "string" },
+        "date": { "type": "string", "format": "date" },
+        "type": { "type": "string", "enum": ["Vaccination", "Traitement", "Contrôle", "Urgence"] },
+        "description": { "type": "string" },
+        "cost": { "type": "number" },
+        "ownerId": { "type": "string" }
+      },
+      "required": ["animalId", "date", "type", "ownerId"]
+    },
+    "Reproduction": {
+      "title": "Reproduction",
+      "description": "Suivi de la reproduction",
+      "type": "object",
+      "properties": {
+        "motherId": { "type": "string" },
+        "fatherId": { "type": "string" },
+        "matingDate": { "type": "string", "format": "date" },
+        "expectedBirthDate": { "type": "string", "format": "date" },
+        "actualBirthDate": { "type": "string", "format": "date" },
+        "status": { "type": "string", "enum": ["En attente", "Réussi", "Échec"] },
+        "ownerId": { "type": "string" }
+      },
+      "required": ["motherId", "matingDate", "status", "ownerId"]
+    },
+    "Stock": {
+      "title": "Stock",
+      "description": "Gestion des stocks (aliments, médicaments)",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "category": { "type": "string", "enum": ["Aliment", "Médicament", "Équipement"] },
+        "quantity": { "type": "number" },
+        "unit": { "type": "string" },
+        "minThreshold": { "type": "number" },
+        "ownerId": { "type": "string" }
+      },
+      "required": ["name", "category", "quantity", "unit", "ownerId"]
+    }
+  },
+  "firestore": {
+    "/animals/{animalId}": { "schema": "Animal", "description": "Collection des animaux" },
+    "/health_records/{recordId}": { "schema": "HealthRecord", "description": "Historique de santé" },
+    "/reproduction/{reproId}": { "schema": "Reproduction", "description": "Suivi reproduction" },
+    "/stocks/{stockId}": { "schema": "Stock", "description": "Inventaire des stocks" }
+  }
+}

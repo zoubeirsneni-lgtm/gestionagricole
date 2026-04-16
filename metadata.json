@@ -1,0 +1,6 @@
+{
+  "name": "ÉlevagePro",
+  "description": "Application complète de gestion d'élevage : suivi des animaux, reproduction, santé et stocks.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
