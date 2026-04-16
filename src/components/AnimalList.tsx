@@ -7,16 +7,16 @@ import {
   TableHead, 
   TableHeader, 
   TableRow 
-} from './ui/table';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
+} from '@/components/ui/table';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import { 
   Dialog, 
   DialogContent, 
   DialogHeader, 
   DialogTitle, 
   DialogTrigger 
-} from './ui/dialog';
+} from '@/components/ui/dialog';
 import { 
   Select, 
   SelectContent, 

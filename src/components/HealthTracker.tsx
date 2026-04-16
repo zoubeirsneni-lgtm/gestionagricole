@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import { useFirestore } from '../hooks/useFirestore';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { 
   Select, 
   SelectContent, 
   SelectItem, 
   SelectTrigger, 
   SelectValue 
-} from './ui/select';
+} from '@/components/ui/select';
 import { 
   Dialog, 
   DialogContent, 
   DialogHeader, 
   DialogTitle, 
   DialogTrigger 
-} from './ui/dialog';
-import { Card, CardContent } from './ui/card';
-import { Badge } from './ui/badge';
+} from '@/components/ui/dialog';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { Plus, HeartPulse, Calendar, Activity } from 'lucide-react';
 import { toast } from 'sonner';
 
