@@ -11,8 +11,8 @@ import {
   Settings,
   TrendingUp
 } from 'lucide-react';
-import { Button } from '@/components/ui/app-button.tsx';
-import { logOut } from '@/lib/firebase';
+import { Button } from '@/components/app-ui/app-button.tsx';
+import { logOut } from '@/lib/firebase.ts';
 import { cn } from '@/lib/utils';
 
 interface LayoutProps {

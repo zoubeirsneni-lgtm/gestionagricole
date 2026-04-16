@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useFirestore } from '@/hooks/useFirestore';
+import { useFirestore } from '@/hooks/useFirestore.ts';
 import { 
   Table, 
   TableBody, 
@@ -7,26 +7,26 @@ import {
   TableHead, 
   TableHeader, 
   TableRow 
-} from '@/components/ui/app-table.tsx';
-import { Button } from '@/components/ui/app-button.tsx';
-import { Input } from '@/components/ui/app-input.tsx';
+} from '@/components/app-ui/app-table.tsx';
+import { Button } from '@/components/app-ui/app-button.tsx';
+import { Input } from '@/components/app-ui/app-input.tsx';
 import { 
   Dialog, 
   DialogContent, 
   DialogHeader, 
   DialogTitle, 
   DialogTrigger 
-} from '@/components/ui/app-dialog.tsx';
+} from '@/components/app-ui/app-dialog.tsx';
 import { 
   Select, 
   SelectContent, 
   SelectItem, 
   SelectTrigger, 
   SelectValue 
-} from '@/components/ui/app-select.tsx';
-import { Label } from '@/components/ui/app-label.tsx';
+} from '@/components/app-ui/app-select.tsx';
+import { Label } from '@/components/app-ui/app-label.tsx';
 import { cn } from '@/lib/utils';
-import { Badge } from '@/components/ui/app-badge.tsx';
+import { Badge } from '@/components/app-ui/app-badge.tsx';
 import { Plus, Search, Trash2, Edit2 } from 'lucide-react';
 import { toast } from 'sonner';
 

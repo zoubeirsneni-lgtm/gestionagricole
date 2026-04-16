@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { useAuth } from '@/hooks/useAuth';
-import { signIn } from '@/lib/firebase';
-import { Layout } from '@/components/Layout';
-import { Dashboard } from '@/components/Dashboard';
-import { Summary } from '@/components/Summary';
-import { AnimalList } from '@/components/AnimalList';
-import { HealthTracker } from '@/components/HealthTracker';
-import { ReproductionTracker } from '@/components/ReproductionTracker';
-import { StockManagement } from '@/components/StockManagement';
-import { Button } from '@/components/ui/app-button.tsx';
-import { Toaster } from '@/components/ui/app-sonner.tsx';
+import { useAuth } from '@/hooks/useAuth.ts';
+import { signIn } from '@/lib/firebase.ts';
+import { Layout } from '@/components/Layout.tsx';
+import { Dashboard } from '@/components/Dashboard.tsx';
+import { Summary } from '@/components/Summary.tsx';
+import { AnimalList } from '@/components/AnimalList.tsx';
+import { HealthTracker } from '@/components/HealthTracker.tsx';
+import { ReproductionTracker } from '@/components/ReproductionTracker.tsx';
+import { StockManagement } from '@/components/StockManagement.tsx';
+import { Button } from '@/components/app-ui/app-button.tsx';
+import { Toaster } from '@/components/app-ui/app-sonner.tsx';
 import { PawPrint, LogIn } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
